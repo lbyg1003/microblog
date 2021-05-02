@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Microblog</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar__brand">
+            <img src="/static/microblog-logo.svg" alt="logo" class="navbar__logo">Microblog
+        </div>
+        <ul class="navbar__navigation">
+            <li class="navbar__navigation-item">
+                <a href="#" class="navbar__link">Recent</a>
+            </li>
+            <li class="navbar__navigation-item">
+                <a href="#" class="navbar__link">Calendar</a>
+            </li>
+        </ul>
+
+    </header>
+
+    <main class="main">
+        <section>
+            <h1>Add new entry</h1>
+            <form action="/" method="POST" class="form">
+<!--            <form action="/entry" method="GET">-->
+                <p class="form__input">
+                    <label for="entry" class="form__label">Entry contents:</label>
+                    <textarea name="content" id="entry" class="form__textarea"></textarea>
+<!--                <input type="text" name="sample" id="entry">-->
+                </p>
+                <button type="submit" class="form__submit">Add entry</button>
+            </form>
+        </section>
+        <section>
+            <h1>Recent posts</h1>
+            {% for entry in entries %}
+                <article class="entry">
+                    <div>
+<!--                    | pipe, truncate(30, true) means it will show '...' after 30 chars-->
+                        <h2 class="entry__title">{{ entry[0] | truncate(30, true) }}</h2>
+                        <time datetime={{ entry[1] }} class="entry__date">@ {{ entry[2] }}</time>
+                    </div>
+                    <p class="entry__content">
+                        {{ entry[0] }}
+                    </p>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__content">
+            <section class="left">
+                <a class="footer__item">Made by BL</a>
+                <a class="footer__item">Check out other stuff</a>
+            </section>
+            <section class="right">
+                <div class="footer__column">
+                    <a class="footer__item">Recent</a>
+                    <a class="footer__item">Calendar</a>
+                </div>
+                <div class="footer__column">
+                    <a class="footer__item" href="#">About</a>
+                    <a class="footer__item">How this was made</a>
+                </div>
+            </section>
+        </div>
+    </footer>
+</body>
+
+</html>
